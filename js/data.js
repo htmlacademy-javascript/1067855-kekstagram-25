@@ -1,11 +1,14 @@
-import {getRandomInt} from './util.js';
-import {getRandomArrayElement} from './util.js';
+import {getRandomInt, getRandomArrayElement} from './util.js';
 
-const OBJECT_COUNTS = 25;
+const PHOTO_COUNT = 25;
 const MAX_COMMENTS = 6;
 const AVATAR_COUNT = 6;
-const MIN_LIKES = 15;
-const MAX_LIKES = 250;
+
+const Likes = {
+  min: 15,
+  max: 250
+};
+
 
 const NAMES = [
   'Дон',
@@ -52,26 +55,15 @@ const createComments = () => (
 const createObjects = (index) => (
   {
     id: index + 1,
-    url: `img/${index}.jpg`,
+    url: `img/${index + 1}.jpg`,
     description: getRandomArrayElement(DESCRIPTION),
-    likes: getRandomInt(MIN_LIKES, MAX_LIKES),
+    likes: getRandomInt(Likes.min, Likes.max),
     comments: Array.from({length: getRandomInt(0, MAX_COMMENTS)}, createComments)
   }
 );
 
-const createPhotos = () => Array.from({length: OBJECT_COUNTS}, (id, index) => createObjects(index));
-
-createPhotos();
-console.log(createPhotos());
+const createPhotos = (count) => Array.from({length: count}, (id, index) => createObjects(index));
 
 export {
-  OBJECT_COUNTS,
-  DESCRIPTION,
-  MIN_LIKES,
-  MAX_LIKES,
-  MAX_COMMENTS,
-  COMMENTS,
-  AVATAR_COUNT,
-  NAMES,
   createPhotos
 };

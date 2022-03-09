@@ -1,2 +1,5 @@
-import './data.js';
-import './util.js';
+import {createPhotos} from './data.js';
+
+const photoList = createPhotos;
+
+console.log(photoList(25));
