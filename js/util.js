@@ -15,7 +15,6 @@ const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) +
  */
 const checkStringLength = (string, maxLength = 140) => string.length <= maxLength;
 
-checkStringLength(1390, 140);
 
 const getRandomArrayElement = (elements) => elements[getRandomInt(0, elements.length - 1)];
 
