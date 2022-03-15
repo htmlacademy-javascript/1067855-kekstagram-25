@@ -4,7 +4,7 @@ const PHOTO_COUNT = 25;
 const MAX_COMMENTS = 6;
 const AVATAR_COUNT = 6;
 
-const Likes = {
+const LIKES = {
   min: 15,
   max: 250
 };
@@ -55,9 +55,9 @@ const createComments = () => (
 const createObjects = (index) => (
   {
     id: index + 1,
-    url: `img/${index + 1}.jpg`,
+    url: `photos/${index + 1}.jpg`,
     description: getRandomArrayElement(DESCRIPTION),
-    likes: getRandomInt(Likes.min, Likes.max),
+    likes: getRandomInt(LIKES.min, LIKES.max),
     comments: Array.from({length: getRandomInt(0, MAX_COMMENTS)}, createComments)
   }
 );
@@ -65,5 +65,6 @@ const createObjects = (index) => (
 const createPhotos = (count) => Array.from({length: count}, (id, index) => createObjects(index));
 
 export {
-  createPhotos
+  createPhotos,
+  PHOTO_COUNT
 };
