@@ -5,7 +5,6 @@ const pictureList = document.querySelector('.pictures');
 
 
 const renderPhotos = (photosData) => {
-
   const templateFragment = document.createDocumentFragment();
   photosData.forEach(({url, likes, comments}) => {
     const photoElement = templatePicture.cloneNode(true);
@@ -20,4 +19,3 @@ const renderPhotos = (photosData) => {
 export {
   renderPhotos
 };
-
