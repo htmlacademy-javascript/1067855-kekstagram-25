@@ -52,10 +52,10 @@ const createComments = () => (
   }
 );
 
-const createObjects = (index) => (
+const createObjects = (i) => (
   {
-    id: index + 1,
-    url: `photos/${index + 1}.jpg`,
+    id: i + 1,
+    url: `photos/${i + 1}.jpg`,
     description: getRandomArrayElement(DESCRIPTION),
     likes: getRandomInt(LIKES.min, LIKES.max),
     comments: Array.from({length: getRandomInt(0, MAX_COMMENTS)}, createComments)
