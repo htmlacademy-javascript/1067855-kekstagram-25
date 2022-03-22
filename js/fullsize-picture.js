@@ -1,4 +1,4 @@
-
+import {onPopupEscKeyDown} from './util.js';
 
 const bigPicture = document.querySelector('.big-picture');
 
@@ -9,8 +9,9 @@ const templateComments = `
       </li>`;
 
 const hideBigPicture = () => {
+  bigPicture.classList.add('hidden');
   document.body.classList.remove('modal-open');
-  bigPicture.classList.add ('hidden')
+  document.removeEventListener('keydown', onPopupEscKeyDown);
 };
 
 const hideElements = () => {
@@ -20,25 +21,27 @@ const hideElements = () => {
   commentLoader.classList.add('hidden');
 };
 
-
 const renderComments = (comments) => {
-  const container = document.querySelector('.social__comments');
-  container.innerHTML = '';
+  const commentsContainer = document.querySelector('.social__comments');
+  commentsContainer.innerHTML = '';
   comments.forEach(({avatar, name, message}) => {
-    container.insertAdjacentHTML('afterbegin', templateComments);
-    container.querySelector('.social__picture').src = avatar;
-    container.querySelector('.social__picture').alt = name;
-    container.querySelector('.social__text').textContent = message;
+    commentsContainer.insertAdjacentHTML('afterbegin', templateComments);
+    commentsContainer.querySelector('.social__picture').src = avatar;
+    commentsContainer.querySelector('.social__picture').alt = name;
+    commentsContainer.querySelector('.social__text').textContent = message;
   });
 };
 
 const showBigPicture = ({url, likes, comments, description}) => {
-  document.body.classList.add('modal-open');
-  bigPicture.classList.remove('hidden');
+  const bigPictureCancel = bigPicture.querySelector('.big-picture__cancel');
   bigPicture.querySelector('.big-picture__img img').src = url;
   bigPicture.querySelector('.likes-count').textContent = likes;
   bigPicture.querySelector('.comments-count').textContent = comments.length;
   bigPicture.querySelector('.social__caption').textContent = description;
+  bigPicture.classList.remove('hidden');
+  bigPictureCancel.addEventListener('click', () => hideBigPicture());
+  document.addEventListener('keydown', onPopupEscKeyDown);
+  document.body.classList.add('modal-open');
   renderComments(comments);
   hideElements();
 };
